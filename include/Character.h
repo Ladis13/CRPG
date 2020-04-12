@@ -2,12 +2,12 @@
 #define CHARACTER_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include "Stats.h"
-#include "SStats.h"
 
 class Character {
-private:
+protected:
     std::string name;
 
     int level;
@@ -15,16 +15,34 @@ private:
     SStats sstats;
 
     int hp;
-    int energy;
+    int stamina;
+    int magic;
 
 public:
     Character();
+    Character(Stats stats);
     ~Character();
 
     //Functions
+    void initialize(std::string name);
     void print();
+    std::string toString();
 
     //Accessors
+    inline std::string getName() const {
+        return this->name; }
+    inline int getLevel() const {
+        return this->level; }
+    inline int getHp() const {
+        return this->hp; }
+    inline int getStamina() const {
+        return this->stamina; }
+    inline int getMagic() const {
+        return this->magic; }
+
+    inline Stats getStats() const {
+        return this->stats; }
+
     inline int getStrength() const {
         return this->stats.getStrength(); }
     inline int getStrudiness() const {
@@ -54,8 +72,30 @@ public:
         return this->sstats.getPerception(); }
     inline int getMastery() const {
         return this->sstats.getMastery(); }
+    inline int getDodge() const {
+        return this->sstats.getDodge(); }
+    inline int getLimit() const {
+        return this->sstats.getLimit(); }
 
     //Modifiers
+    inline void gainHp(int n) {
+        this->hp += n;
+        if (this->hp > getVitality())
+        this->hp = getVitality(); }
+    inline void gainStamina(int n) {
+        this->stamina += n; if (this->stamina > getEnergy())
+        this->stamina = getEnergy(); }
+    inline void gainMagic(int n) { this->magic += n; }
+
+    inline void setName(std::string name) {
+        this->name = name; }
+    inline void setLevel(int n) {
+        this->level = n; }
+    inline void setHp(int n) {
+        this->hp = n; }
+    inline void setStamina(int n) {
+        this->stamina = n; }
+
     inline void setStrength(int n) {
         this->stats.setStrength(n); }
     inline void setSturdiness(int n) {
@@ -68,6 +108,9 @@ public:
         this->stats.setAgility(n); }
     inline void setLuck(int n) {
         this->stats.setLuck(n); }
+
+    inline void setSStats(SStats sstats) {
+        this->sstats = sstats; }
 
     inline void setVitality(int n) {
         this->sstats.setVitality(n); }
@@ -85,6 +128,10 @@ public:
         this->sstats.setPerception(n); }
     inline void setMastery(int n) {
         this->sstats.setMastery(n); }
+    inline void setDodge(int n) {
+        this->sstats.setDodge(n); }
+    inline void setLimit(int n) {
+        this->sstats.setLimit(n); }
 };
 
 #endif

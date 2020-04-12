@@ -1,7 +1,7 @@
 #ifndef E_SSTATS_H
 #define E_SSTATS_H
 
-#define NSSTATS 8
+#define NSSTATS 10
 
 enum SSTAT {
     VITALITY = 0,
@@ -11,7 +11,9 @@ enum SSTAT {
     POWER,
     RESISTANCE,
     PERCEPTION,
-    MASTERY
+    MASTERY,
+    DODGE,
+    LIMIT
 };
 
 #endif

@@ -4,6 +4,20 @@ Character::Character()
 {
     this->name = "-";
     this->level = 0;
+    this->hp = 0;
+    this->stamina = 0;
+    this->magic = 0;
+}
+
+Character::Character(Stats stats)
+{
+    this->name = "-";
+    this->level = 0;
+    this->stats = stats;
+    this->sstats = this->stats.getSStats();
+    this->hp = 0;
+    this->stamina = 0;
+    this->magic = 0;
 }
 
 Character::~Character()
@@ -11,14 +25,55 @@ Character::~Character()
 
 }
 
+void Character::initialize(std::string name)
+{
+    this->name = name;
+    this->level = 1;
+    this->stats = Stats(10, 10, 10, 10, 10, 10);
+    this->sstats = this->stats.getSStats();
+    this->hp = getVitality();
+    this->stamina = getEnergy();
+    this->magic = 0;
+}
+
 void Character::print()
 {
     std::cout << this->name << "\t" << this->level << std::endl;
-    std::cout << "Force :" << getStrength() << std::endl;
-    std::cout << "Robustesse :" << getStrudiness() << std::endl;
-    std::cout << "Intelligence :" << getIntelligence() << std::endl;
-    std::cout << "Esprit :" << getSpirit() << std::endl;
-    std::cout << "Agilité :" << getAgility() << std::endl;
-    std::cout << "Chance :" << getLuck() << std::endl << std::endl;
+    std::cout << "--== Statistiques Primaires ==--" << std::endl;
+    std::cout << "Force :\t\t" << getStrength() << std::endl;
+    std::cout << "Robustesse :\t" << getStrudiness() << std::endl;
+    std::cout << "Intelligence :\t" << getIntelligence() << std::endl;
+    std::cout << "Esprit :\t" << getSpirit() << std::endl;
+    std::cout << "Agilité :\t" << getAgility() << std::endl;
+    std::cout << "Chance :\t" << getLuck() << std::endl << std::endl;
 
+    std::cout << "--== Statistiques Secondaires ==--" << std::endl;
+    std::cout << "Vitalité :\t" << this->hp << "/" << getVitality() << std::endl;
+    std::cout << "Énergie :\t" << this->stamina << "/" << getEnergy() << std::endl;
+    std::cout << "Ténacité :\t" << getTenacity() << std::endl;
+    std::cout << "Volonté :\t" << getWill() << std::endl;
+    std::cout << "Puissance :\t" << getPower() << std::endl;
+    std::cout << "Résistance :\t" << getResistance() << std::endl;
+    std::cout << "Perception :\t" << getPerception() << std::endl;
+    std::cout << "Maîtrise :\t" << getMastery() << std::endl;
+    std::cout << "Esquive :\t" << getDodge() << std::endl << std::endl;
+
+}
+
+std::string Character::toString()
+{
+    std::string ret = "";
+
+    ret += this->name + "\n";
+    ret += this->level + "\n";
+    ret += getStrength() + "\n";
+    ret += getStrudiness() + "\n";
+    ret += getIntelligence() + "\n";
+    ret += getSpirit() + "\n";
+    ret += getAgility() + "\n";
+    ret += getLuck() + "\n";
+    ret += this->hp + "\n";
+    ret += this->stamina + "\n";
+
+    return ret;
 }

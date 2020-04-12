@@ -1,13 +1,16 @@
 #include "../include/Game.h"
+#include "../include/Item.h"
 
 int main()
 {
     Game game;
 
+    game.initMenu();
+
     while (game.isPlaying()) {
         game.mainMenu();
     }
 
-    std::cout << "Au revoir ..." << std::endl;
+    std::cout << std::endl << "Au revoir ..." << std::endl;
     return 0;
 }

@@ -5,7 +5,7 @@ Game::Game()
     this->choice = 0;
     this->playing = true;
 
-    this->savefile = "/home/ladis/CODE/CPP/CRPG/data/save.data";
+    this->savefile = "data/save.data";
 }
 
 Game::~Game()

@@ -9,7 +9,7 @@ vpath %.h $(INC)
 vpath %.cpp $(SRC)
 vpath %.o $(OBJ)
 
-VERSION = 0.1.0
+VERSION = 0.2.0
 
 main: $(addprefix $(OBJ)/, main.o Game.o Character.o Stats.o SStats.o Player.o Item.o)
 	$(CC) $(FLAGS) $^ -o $@
@@ -22,4 +22,4 @@ obj/%.o: %.cpp %.h
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -r $(OBJ)
+	rm -r $(OBJ) main

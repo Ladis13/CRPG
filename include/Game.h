@@ -2,15 +2,18 @@
 #define GAME_H
 
 #include "Player.h"
-
+#include "Enemy.h"
+#include "DArr.h"
 
 class Game {
 private :
     int choice;
     bool playing;
 
-    std::string savefile;
     Player player;
+    std::string savefile;
+
+    Random rand;
 
 public :
     Game();

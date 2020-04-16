@@ -9,15 +9,15 @@ Character::Character()
     this->magic = 0;
 }
 
-Character::Character(Stats stats)
+Character::Character(const Character& character)
 {
-    this->name = "-";
-    this->level = 0;
-    this->stats = stats;
+    this->name = character.getName();
+    this->level = character.getLevel();
+    this->stats = character.getStats();
     this->sstats = this->stats.getSStats();
-    this->hp = 0;
-    this->stamina = 0;
-    this->magic = 0;
+    this->hp = character.getHp();
+    this->stamina = character.getStamina();
+    this->magic = character.getMagic();
 }
 
 Character::~Character()
@@ -34,6 +34,19 @@ void Character::initialize(std::string name)
     this->hp = getVitality();
     this->stamina = getEnergy();
     this->magic = 0;
+}
+
+unsigned Character::takeDamage(unsigned damage)
+{
+    unsigned realDmg = damage;
+    this->hp -= damage;
+
+    if(this->hp < 0) {
+        realDmg -= this->hp;
+        this->hp = 0;
+    }
+
+    return realDmg;
 }
 
 void Character::print()
@@ -74,6 +87,7 @@ std::string Character::toString()
     ret += getLuck() + "\n";
     ret += this->hp + "\n";
     ret += this->stamina + "\n";
+    ret += this->magic + "\n";
 
     return ret;
 }

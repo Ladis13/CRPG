@@ -17,7 +17,7 @@ SStats Stats::getSStats()
 {
     SStats sstats;
 
-    int vitality = floor(0.25*getStrength() + getStrudiness() + 3);
+    int vitality = floor(0.25*getStrength() + getStrudiness() + 0.1*getSpirit() + 2);
     sstats.setVitality(vitality);
 
     int energy = floor(0.25*getStrength() + 0.50*getStrudiness() + 0.75*getAgility() + 0.25*getIntelligence() - 2);
@@ -32,10 +32,10 @@ SStats Stats::getSStats()
     int power = floor(0.2*getStrength() + 0.2*getIntelligence());
     sstats.setPower(power);
 
-    int resistance = floor(0.2*getStrudiness() + 0.15*getSpirit());
+    int resistance = floor((0.2*getStrudiness() + 0.15*getSpirit()) / 2);
     sstats.setResistance(resistance);
 
-    int perception = floor(0.2*getAgility() + 0.15*getIntelligence());
+    int perception = floor((0.15*getAgility() + 0.2*getIntelligence()) * 2) - 2;
     sstats.setPerception(perception);
 
     int mastery = floor(0.05*getStrength() + 0.05*getAgility() + 0.05*getIntelligence() + 0.05*getSpirit());

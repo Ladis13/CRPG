@@ -1,5 +1,4 @@
 #include "../include/Game.h"
-#include "../include/Item.h"
 
 int main()
 {

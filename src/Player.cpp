@@ -29,6 +29,11 @@ Player::Player(std::string infile)
     std::fstream fs;
     fs.open(infile);
 
+    if (!fs.is_open()) {
+        std::cerr << "Erreur lors de l'ouverture du fichier : " << infile << std::endl;
+        Player();
+    }
+
     getline(fs, this->name);
     fs >> this->level;
 

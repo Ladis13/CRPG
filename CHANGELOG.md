@@ -1,5 +1,41 @@
 # CRPG changelog
 
+## Version 0.3.0
+
+- Game class has change :
+
+  - Menus are now protected from error input and do not crash the program anymore
+  - New Menu :
+    - Combat menu, this menu can handle random fight from 1 to 3 enemies.
+      - Choices :
+        - Flee
+        - Attack
+          - Enemy choice
+        - Protect : doubles resistance
+        - The fight is turn by turn, you play and after all enemy play their turn
+
+- Character class has new features :
+
+  - Functions :
+    - An is alive function
+    - A function to take damages
+
+- A new class that inherit from character, Enemy class:
+  - Functions :
+    - Constructor / Desturctor
+    - Accessors / Modifiers
+
+* Item has new features :
+
+  - Functions :
+    - Accessors
+
+* A new class is created for future inheritance, Event class.
+
+* A template class can handle dynamic array of generic type
+
+* A new class Random is created to generater random number between boundaries.
+
 ## Version 0.2.0
 
 - Makefile compile all new features

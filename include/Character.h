@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include "Stats.h"
+#include "Random.h"
 
 class Character {
 protected:
@@ -20,11 +21,14 @@ protected:
 
 public:
     Character();
-    Character(Stats stats);
+    Character(const Character& character);
     ~Character();
 
     //Functions
     void initialize(std::string name);
+
+    unsigned takeDamage(unsigned damage);
+
     void print();
     std::string toString();
 
@@ -39,6 +43,13 @@ public:
         return this->stamina; }
     inline int getMagic() const {
         return this->magic; }
+
+    inline bool isDead() const {
+        return this->hp <= 0; }
+    inline bool isExhausted() const {
+        return this->stamina <= 0; }
+    inline bool isCorrupted() const {
+        return this->magic > getLimit(); }
 
     inline Stats getStats() const {
         return this->stats; }

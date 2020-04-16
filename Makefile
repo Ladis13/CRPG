@@ -9,12 +9,15 @@ vpath %.h $(INC)
 vpath %.cpp $(SRC)
 vpath %.o $(OBJ)
 
-VERSION = 0.2.0
+OBJS = main.o Game.o Character.o Stats.o SStats.o Player.o Item.o Random.o Enemy.o Event.o
 
-main: $(addprefix $(OBJ)/, main.o Game.o Character.o Stats.o SStats.o Player.o Item.o)
+VERSION = 0.3.0
+
+main: $(addprefix $(OBJ)/, $(OBJS))
+	@mkdir -p data
 	$(CC) $(FLAGS) $^ -o $@
 
-obj/main.o: main.cpp
+obj/main.o: main.cpp Game.h
 	@mkdir -p $(OBJ)
 	$(CC) $(FLAGS) -c $< -o $@
 

@@ -20,9 +20,9 @@ std::string Item::toString()
 {
     std::string ret = "";
 
-    ret += std::to_string(this->id) + "";
+    ret += std::to_string(this->id) + " ";
     ret += this->name + "\n";
-    ret += this->desc;
+    ret += this->desc + "\n";
     ret += std::to_string(this->price) + " " + std::to_string(this->rarity);
 
     return ret;

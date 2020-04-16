@@ -23,7 +23,8 @@ public :
     void initMenu();
     void mainMenu();
     void statMenu();
-    void combatMenu();
+    void restMenu();
+    void combatMenu(bool pstart = true);
     void shopMenu();
 
     void createPlayer();

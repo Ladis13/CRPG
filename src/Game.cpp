@@ -63,7 +63,7 @@ void Game::mainMenu()
     std::cout << "0.Quitter" << std::endl;
     std::cout << "1.Personnage" << std::endl;
     std::cout << "2.Sauvegarder" << std::endl;
-    std::cout << "3.Gain exp" << std::endl;
+    std::cout << "3.Se reposer" << std::endl;
     std::cout << "4.Use stat points" << std::endl;
     std::cout << "5.Combat" << std::endl << std::endl;
 
@@ -90,7 +90,10 @@ void Game::mainMenu()
             savePlayer();
             break;
         case 3:
-            this->player.gainExp(200);
+            if (this->player.getHp() == this->player.getVitality())
+                std::cout << "Vous n'êtes même pas blessé, un peu de courage !" << std::endl << std::endl;
+            else
+                restMenu();
             break;
         case 4:
             if (this->player.getStatPoints() <= 0)
@@ -166,7 +169,51 @@ void Game::statMenu()
     this->player.gainStamina(this->player.getEnergy() - tmpEne);
 }
 
-void Game::combatMenu()
+void Game::restMenu()
+{
+    std::cout << "MENU DE REPOS" << std::endl;
+    std::cout << "0.Retour" << std::endl;
+    std::cout << "1.Dormir dans la nature" << std::endl;
+    std::cout << "2.Dormir à l'auberge (10 po)" << std::endl << std::endl;
+
+    std::cout << "Choix :";
+    std::cin >> this->choice;
+
+    if (this->choice == 2 && this->player.getGold() < 10) {
+        std::cout << "Vous n'avez pas assez de pièces d'or pour cela !" << std::endl << std::endl;
+        this->choice = 0;
+    }
+
+    while (std::cin.fail() || this->choice < 0 || this->choice > 2) {
+        std::cin.clear();
+        std::cin.ignore();
+        std::cout << "Choix non reconnu" << std::endl << std::endl;
+
+        std::cout << "Choix :";
+        std::cin >> this->choice;
+    }
+
+    switch (this->choice) {
+        case 0:
+            break;
+        case 1:
+            std::cout << "Vous dormez à la belle étoile, vous régénérez " << this->player.getVitality() / 2 << " points de vie !" << std::endl;
+            this->player.gainHp(this->player.getVitality() / 2);
+            if (this->rand.gen(1, 3) == 1) {
+                std::cout << "Vous êtes aggressé pendant votre sommeil !" << std::endl << std::endl;
+                combatMenu(false);
+            }
+            break;
+        case 2:
+            std::cout << "Vous dormez à l'auberge, vous récupérez tous vos points de vie !" << std::endl << std::endl;
+            this->player.gainHp(this->player.getVitality());
+            this->player.gainGold(-10);
+            break;
+
+    }
+}
+
+void Game::combatMenu(bool pstart)
 {
     DArr<Enemy> enemies;
     int nbEnemy = rand.gen(1, 3);
@@ -187,7 +234,7 @@ void Game::combatMenu()
     bool pDefeated = false;
     bool eDefeated = false;
 
-    bool playerTurn = true;
+    bool playerTurn = pstart;
     bool protect = false;
 
     while (!escaped && !pDefeated && !eDefeated) {
@@ -352,11 +399,15 @@ void Game::combatMenu()
         std::cout << "Vous avez triomphé de vos ennemis, " << std::endl << std::endl;
 
         int exp = 0;
+        int gold = 0;
         for (size_t i = 0; i < enemies.size(); i++) {
-            exp += this->rand.gen(4 * (enemies[i].getLevel() + 1), 6 * (enemies[i].getLevel() + 1));
+            int eLevel = enemies[i].getLevel();
+            exp += this->rand.gen(4 * (eLevel + 1), 6 * (eLevel + 1));
+            gold += this->rand.gen(eLevel + 3, 2*eLevel + 3);
         }
-        std::cout << "vous avez gagné " << exp << " points d'expériences !" << std::endl << std::endl;
+        std::cout << "vous avez gagné " << exp << " points d'expériences et " << gold << " pièces d'or !" << std::endl << std::endl;
         this->player.gainExp(exp);
+        this->player.gainGold(gold);
     }
 
     if (escaped)

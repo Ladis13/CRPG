@@ -10,6 +10,7 @@ int main()
         game.mainMenu();
     }
 
-    std::cout << std::endl << "Au revoir ..." << std::endl;
+    std::cout << "=\tAu revoir ..." << std::endl;
+    std::cout << "=\n======" << std::endl;
     return 0;
 }

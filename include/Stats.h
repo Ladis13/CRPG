@@ -2,8 +2,8 @@
 #define STATS_H
 
 #include <cmath>
-#include "ESTATS.h"
 #include "SStats.h"
+#include "ESTATS.h"
 
 class Stats {
 private:
@@ -14,12 +14,12 @@ public:
     ~Stats();
 
     //Functions
-    SStats getSStats();
+    SStats getSStats(int level = 1);
 
     //Accessors
     inline int getStrength() const {
         return this->stats[STAT::STRENGTH]; }
-    inline int getStrudiness() const {
+    inline int getSturdiness() const {
         return this->stats[STAT::STURDINESS]; }
     inline int getIntelligence() const {
         return this->stats[STAT::INTELLIGENCE]; }

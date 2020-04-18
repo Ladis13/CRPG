@@ -1,5 +1,30 @@
 # CRPG changelog
 
+## Version 0.4.0
+
+All menus and outputs as text are now more handsome. Game control as number input are all protected against misinput.
+
+There is one new menu added to the game, a Game Over menu, which propose to load, start a new partie or quit.
+
+Player class is rearanged to have an inventory, in wich we can add Items, to help this the is an operator overload wich prevent from crash.
+
+The system that calculate statistics has been modified to be balanced, but its still in test for now.
+
+DArr, the dynamic template array has been fixed and so a inventory and fight groups too.
+
+A new class to handle an inventory has been created and is working for items, and weapons.
+
+Item has a new son, Weapon class wich will be equiped to deal more damage. Weapons have two more attributes :
+
+- Damage minimum,
+- Damage maximum.
+
+Random class has two new features :
+
+- Looting exp by level,
+- Looting gold by level.
+  These are in tests too for now.
+
 ## Version 0.3.0
 
 - Game class has change :

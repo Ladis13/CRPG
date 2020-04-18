@@ -14,6 +14,8 @@ public :
 
     //Functions
     int gen(int min = 0, int max = 100);
+    int lootExp(int level = 0);
+    int lootGold(int level = 0);
 };
 
 #endif

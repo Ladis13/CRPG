@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "Character.h"
+#include "Inventory.h"
 
 class Player : public Character {
 private:
@@ -10,18 +11,31 @@ private:
     int gold;
     int statPoints;
 
+    Inventory inventory;
+
 public:
+    // Constructors
     Player();
     Player(Stats stats);
     Player(std::string infile);
+
+    // Desctructor
     ~Player();
 
-    //Functions
+    // Operators
+    void operator= (Player& player);
+
+    // Functions
     void initialize(std::string name);
-    int levelUp();
     void save(std::string savefile);
+
+    int levelUp();
+    int calculExpNext();
+
     void print();
     std::string toString();
+
+    inline void printInv() { this->inventory.print(); }
 
     //Accessors
     inline int getExp() const { return this->exp; }
@@ -29,28 +43,16 @@ public:
     inline int getGold() const { return this->gold; }
     inline int getStatPoints() const { return this->statPoints; }
 
-    //Modifiers
-    inline void gainStrength(int n) {
-        this->stats.gainStrength(n); }
-    inline void gainSturdiness(int n) {
-        this->stats.gainSturdiness(n); }
-    inline void gainIntelligence(int n) {
-        this->stats.gainIntelligence(n); }
-    inline void gainSpirit(int n) {
-        this->stats.gainSpirit(n); }
-    inline void gainAgility(int n) {
-        this->stats.gainAgility(n); }
-    inline void gainLuck(int n) {
-        this->stats.gainLuck(n); }
+    inline Inventory& getInventory(){ return this->inventory; }
+    inline Item getItem(int index) { return *this->inventory.getItem(index);}
+    inline unsigned getInventorySize() { return this->inventory.getInventorySize(); }
 
+    //Modifiers
     inline void gainExp(int n) { this->exp += n; }
     inline void gainGold(int n) { this->gold += n; }
     inline void gainStatPoints(int n) { this->statPoints += n; }
 
-    inline void setExp(int n) { this->exp = n; }
-    inline void setExpNext(int n) { this->expNext = n; }
-    inline void setGold(int n) {this->gold = n; }
-    inline void setStatPoints(int n) {this->statPoints = n; }
+    inline void addItem(Item *item) { this->inventory.addItem(item); }
 
 };
 

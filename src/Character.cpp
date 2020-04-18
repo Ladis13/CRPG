@@ -14,7 +14,7 @@ Character::Character(const Character& character)
     this->name = character.getName();
     this->level = character.getLevel();
     this->stats = character.getStats();
-    this->sstats = this->stats.getSStats();
+    this->sstats = this->stats.getSStats(this->level);
     this->hp = character.getHp();
     this->stamina = character.getStamina();
     this->magic = character.getMagic();
@@ -30,7 +30,7 @@ void Character::initialize(std::string name)
     this->name = name;
     this->level = 1;
     this->stats = Stats(10, 10, 10, 10, 10, 10);
-    this->sstats = this->stats.getSStats();
+    this->sstats = this->stats.getSStats(this->level);
     this->hp = getVitality();
     this->stamina = getEnergy();
     this->magic = 0;
@@ -54,7 +54,7 @@ void Character::print()
     std::cout << this->name << "\t" << this->level << std::endl;
     std::cout << "--== Statistiques Primaires ==--" << std::endl;
     std::cout << "Force :\t\t" << getStrength() << std::endl;
-    std::cout << "Robustesse :\t" << getStrudiness() << std::endl;
+    std::cout << "Robustesse :\t" << getSturdiness() << std::endl;
     std::cout << "Intelligence :\t" << getIntelligence() << std::endl;
     std::cout << "Esprit :\t" << getSpirit() << std::endl;
     std::cout << "Agilité :\t" << getAgility() << std::endl;
@@ -80,7 +80,7 @@ std::string Character::toString()
     ret += this->name + "\n";
     ret += this->level + "\n";
     ret += getStrength() + "\n";
-    ret += getStrudiness() + "\n";
+    ret += getSturdiness() + "\n";
     ret += getIntelligence() + "\n";
     ret += getSpirit() + "\n";
     ret += getAgility() + "\n";
@@ -91,3 +91,19 @@ std::string Character::toString()
 
     return ret;
 }
+
+void Character::gainHp(int n)
+{
+    this->hp += n;
+
+    if (this->hp > getVitality())
+        this->hp = getVitality();
+}
+
+void Character::gainStamina(int n)
+{
+    this->stamina += n;
+
+    if (this->stamina > getEnergy())
+        this->stamina = getEnergy();
+    }

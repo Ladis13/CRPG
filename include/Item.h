@@ -7,8 +7,6 @@
 
 class Item {
 protected:
-    unsigned long id;
-
     std::string name;
     std::string desc;
     int price;
@@ -16,14 +14,14 @@ protected:
 
 
 public:
-    Item(std::string name = "-", std::string desc = "-", int price = 0, RARITY rarity = RARITY::COMMON);
+    Item(std::string name = "-", int price = 0, RARITY rarity = RARITY::COMMON, std::string desc = "-");
+    Item(const Item& item);
     ~Item();
 
     //Functions
     std::string toString();
 
     // Accessors
-    inline unsigned long getId() const { return this->id; }
     inline std::string getName() const { return this->name; }
     inline std::string getDesc() const { return this->desc; }
     inline int getPrice() const { return this->price; }

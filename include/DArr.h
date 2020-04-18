@@ -77,10 +77,9 @@ T& DArr<T>::operator[] (const unsigned index)
 template <typename T>
 void DArr<T>::operator= (const DArr& arr)
 {
-    for (size_t i = 0; i < this->nbElem; i++) {
+    for (unsigned i = 0; i < this->nbElem; i++) {
         delete this->arr[i];
     }
-    delete[] this->arr;
 
     this->capacity = arr.capacity;
     this->capInit = arr.capInit;
@@ -91,8 +90,6 @@ void DArr<T>::operator= (const DArr& arr)
     for (size_t i = 0; i < this->nbElem; i++) {
         this->arr[i] = new T(*arr.arr[i]);
     }
-
-    initialize(this->nbElem);
 }
 
 template <typename T>

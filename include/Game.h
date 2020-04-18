@@ -26,6 +26,7 @@ public :
     void restMenu();
     void combatMenu(bool pstart = true);
     void shopMenu();
+    void gameOverMenu();
 
     void createPlayer();
     void savePlayer();

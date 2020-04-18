@@ -11,7 +11,7 @@ vpath %.o $(OBJ)
 
 OBJS = main.o Game.o Character.o Stats.o SStats.o Player.o Item.o Random.o Enemy.o Event.o Weapon.o Inventory.o
 
-VERSION = 0.3.0
+VERSION = 0.4.0
 
 main: $(addprefix $(OBJ)/, $(OBJS))
 	@mkdir -p data
